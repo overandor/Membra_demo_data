@@ -1,39 +1,59 @@
 {
+  "bundle_id": "membra_demo_neighborhood_launch_001",
+  "created_for": "MEMBRA Proof Network demo",
+  "scenario": "Local coffee brand funds verified QR/NFC physical media placements across a vehicle, wearable shirt, storefront window, and local relay handoff.",
+  "doctrine": {
+    "consent": "No consent means no listing, no campaign, no proof, no payout eligibility.",
+    "proof": "Proof creates reviewable eligibility, not guaranteed payment.",
+    "settlement": "External regulated rails settle money. Demo states are not real payouts.",
+    "privacy": "Public records contain hashes and consented metadata only."
+  },
   "owners": [
-    {"id": "owner_001", "display_name": "Northside Driver", "city": "Toronto", "status": "active"},
-    {"id": "owner_002", "display_name": "Campus Ambassador", "city": "Toronto", "status": "active"},
-    {"id": "owner_003", "display_name": "Corner Window Host", "city": "Toronto", "status": "active"}
+    {"owner_id": "usr_owner_vehicle_001", "display_name": "Vehicle Owner", "role": "owner", "city": "Scranton", "trust_status": "verified_demo"},
+    {"owner_id": "usr_owner_wear_001", "display_name": "Wearable Participant", "role": "owner", "city": "Scranton", "trust_status": "verified_demo"},
+    {"owner_id": "usr_owner_window_001", "display_name": "Storefront Partner", "role": "owner", "city": "Scranton", "trust_status": "verified_demo"},
+    {"owner_id": "usr_relay_agent_001", "display_name": "Relay Agent", "role": "relay_agent", "city": "Scranton", "trust_status": "verified_demo"}
   ],
   "advertisers": [
-    {"id": "adv_001", "company_name": "Gilead Coffee", "status": "active"}
-  ],
-  "campaigns": [
-    {"id": "camp_001", "advertiser_id": "adv_001", "title": "Gilead Local Launch", "destination_url": "https://example.com/gilead", "budget_cents": 250000, "status": "funded"}
+    {"advertiser_id": "adv_coffee_001", "company_name": "Keystone Coffee Demo", "campaign_budget_usd": 1200, "status": "funded_demo"}
   ],
   "assets": [
-    {"id": "asset_001", "owner_id": "owner_001", "asset_type": "vehicle", "title": "Rear window SUV placement", "city": "Toronto", "verification_status": "verified"},
-    {"id": "asset_002", "owner_id": "owner_002", "asset_type": "wearable", "title": "QR hoodie placement", "city": "Toronto", "verification_status": "verified"},
-    {"id": "asset_003", "owner_id": "owner_003", "asset_type": "window", "title": "Street-facing apartment window", "city": "Toronto", "verification_status": "verified"}
+    {"asset_id": "asset_vehicle_window_001", "owner_id": "usr_owner_vehicle_001", "asset_type": "vehicle_rear_window", "title": "Rear window QR placement", "consent_scope": "campaign placement and proof reporting"},
+    {"asset_id": "asset_wear_shirt_001", "owner_id": "usr_owner_wear_001", "asset_type": "wearable_shirt", "title": "QR campaign shirt", "consent_scope": "wearable campaign proof and scan reporting"},
+    {"asset_id": "asset_storefront_window_001", "owner_id": "usr_owner_window_001", "asset_type": "storefront_window", "title": "Storefront window decal", "consent_scope": "window campaign proof and scan reporting"}
+  ],
+  "campaigns": [
+    {"campaign_id": "cmp_coffee_launch_001", "advertiser_id": "adv_coffee_001", "title": "Keystone Coffee Neighborhood Launch", "budget_usd": 1200, "status": "active_demo", "destination_url": "https://example.com/coffee-demo"}
   ],
   "media_kits": [
-    {"id": "kit_001", "campaign_id": "camp_001", "asset_id": "asset_001", "kit_type": "rear_window_decal", "qr_id": "qr_vehicle_001", "status": "activated"},
-    {"id": "kit_002", "campaign_id": "camp_001", "asset_id": "asset_002", "kit_type": "wearable_qr_patch", "qr_id": "qr_wear_001", "status": "activated"},
-    {"id": "kit_003", "campaign_id": "camp_001", "asset_id": "asset_003", "kit_type": "window_qr_sticker", "qr_id": "qr_window_001", "status": "activated"}
+    {"kit_id": "kit_vehicle_qr_001", "campaign_id": "cmp_coffee_launch_001", "asset_id": "asset_vehicle_window_001", "kit_type": "qr_window_sticker", "qr_url": "/g/art_vehicle_001", "nfc_id": "nfc_vehicle_001", "status": "installed_proof_approved"},
+    {"kit_id": "kit_wear_qr_001", "campaign_id": "cmp_coffee_launch_001", "asset_id": "asset_wear_shirt_001", "kit_type": "wearable_qr_print", "qr_url": "/wear/wear_001", "nfc_id": "nfc_wear_001", "status": "installed_proof_approved"},
+    {"kit_id": "kit_window_qr_001", "campaign_id": "cmp_coffee_launch_001", "asset_id": "asset_storefront_window_001", "kit_type": "storefront_window_decal", "qr_url": "/g/art_window_001", "nfc_id": "nfc_window_001", "status": "proof_needs_more_evidence"}
+  ],
+  "relay_jobs": [
+    {"relay_id": "relay_kit_drop_001", "requester_id": "adv_coffee_001", "pickup_node": "local_print_partner", "dropoff_node": "usr_owner_window_001", "mode": "local_delivery", "estimated_price_usd": 9.75, "status": "completed_proof_submitted"}
   ],
   "proof_events": [
-    {"id": "proof_001", "campaign_id": "camp_001", "owner_id": "owner_001", "asset_id": "asset_001", "media_kit_id": "kit_001", "proof_type": "install_photo", "status": "approved"},
-    {"id": "proof_002", "campaign_id": "camp_001", "owner_id": "owner_002", "asset_id": "asset_002", "media_kit_id": "kit_002", "proof_type": "wear_photo", "status": "approved"},
-    {"id": "proof_003", "campaign_id": "camp_001", "owner_id": "owner_003", "asset_id": "asset_003", "media_kit_id": "kit_003", "proof_type": "window_install_photo", "status": "submitted"}
+    {"proof_id": "proof_vehicle_install_001", "subject_type": "media_kit", "subject_id": "kit_vehicle_qr_001", "proof_type": "installation_photo", "proof_hash": "demo_hash_vehicle_install_001", "status": "approved"},
+    {"proof_id": "proof_wear_install_001", "subject_type": "wear_kit", "subject_id": "kit_wear_qr_001", "proof_type": "wearable_photo", "proof_hash": "demo_hash_wear_install_001", "status": "approved"},
+    {"proof_id": "proof_window_install_001", "subject_type": "media_kit", "subject_id": "kit_window_qr_001", "proof_type": "storefront_photo", "proof_hash": "demo_hash_window_install_001", "status": "needs_more_evidence"},
+    {"proof_id": "proof_relay_drop_001", "subject_type": "relay_job", "subject_id": "relay_kit_drop_001", "proof_type": "dropoff_photo", "proof_hash": "demo_hash_relay_drop_001", "status": "approved"}
   ],
   "tracking_events": [
-    {"id": "scan_001", "campaign_id": "camp_001", "qr_id": "qr_vehicle_001", "event_type": "qr_scan"},
-    {"id": "scan_002", "campaign_id": "camp_001", "qr_id": "qr_vehicle_001", "event_type": "qr_scan"},
-    {"id": "scan_003", "campaign_id": "camp_001", "qr_id": "qr_wear_001", "event_type": "qr_scan"},
-    {"id": "scan_004", "campaign_id": "camp_001", "qr_id": "qr_window_001", "event_type": "qr_scan"}
+    {"event_id": "scan_001", "subject_id": "kit_vehicle_qr_001", "event_type": "qr_scan", "city": "Scranton", "count": 31},
+    {"event_id": "scan_002", "subject_id": "kit_wear_qr_001", "event_type": "qr_scan", "city": "Scranton", "count": 19},
+    {"event_id": "tap_001", "subject_id": "kit_window_qr_001", "event_type": "nfc_tap", "city": "Scranton", "count": 7}
   ],
-  "reward_states": [
-    {"id": "reward_001", "campaign_id": "camp_001", "owner_id": "owner_001", "proof_event_id": "proof_001", "amount_cents": 7500, "status": "eligible"},
-    {"id": "reward_002", "campaign_id": "camp_001", "owner_id": "owner_002", "proof_event_id": "proof_002", "amount_cents": 5000, "status": "eligible"},
-    {"id": "reward_003", "campaign_id": "camp_001", "owner_id": "owner_003", "proof_event_id": "proof_003", "amount_cents": 6500, "status": "held"}
-  ]
+  "wallet_states": [
+    {"account_id": "acct_vehicle_001", "owner_id": "usr_owner_vehicle_001", "subject_id": "kit_vehicle_qr_001", "eligible_amount_usd": 45, "status": "eligible_pending_external_settlement"},
+    {"account_id": "acct_wear_001", "owner_id": "usr_owner_wear_001", "subject_id": "kit_wear_qr_001", "eligible_amount_usd": 35, "status": "eligible_pending_external_settlement"},
+    {"account_id": "acct_window_001", "owner_id": "usr_owner_window_001", "subject_id": "kit_window_qr_001", "eligible_amount_usd": 0, "status": "held_needs_more_evidence"}
+  ],
+  "kpi_targets": {
+    "proof_approval_rate_pct": 75,
+    "scan_total": 57,
+    "active_placements": 3,
+    "eligible_payout_usd": 80,
+    "held_payout_usd": 0
+  }
 }
