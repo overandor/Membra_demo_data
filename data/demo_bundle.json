@@ -1,0 +1,39 @@
+{
+  "owners": [
+    {"id": "owner_001", "display_name": "Northside Driver", "city": "Toronto", "status": "active"},
+    {"id": "owner_002", "display_name": "Campus Ambassador", "city": "Toronto", "status": "active"},
+    {"id": "owner_003", "display_name": "Corner Window Host", "city": "Toronto", "status": "active"}
+  ],
+  "advertisers": [
+    {"id": "adv_001", "company_name": "Gilead Coffee", "status": "active"}
+  ],
+  "campaigns": [
+    {"id": "camp_001", "advertiser_id": "adv_001", "title": "Gilead Local Launch", "destination_url": "https://example.com/gilead", "budget_cents": 250000, "status": "funded"}
+  ],
+  "assets": [
+    {"id": "asset_001", "owner_id": "owner_001", "asset_type": "vehicle", "title": "Rear window SUV placement", "city": "Toronto", "verification_status": "verified"},
+    {"id": "asset_002", "owner_id": "owner_002", "asset_type": "wearable", "title": "QR hoodie placement", "city": "Toronto", "verification_status": "verified"},
+    {"id": "asset_003", "owner_id": "owner_003", "asset_type": "window", "title": "Street-facing apartment window", "city": "Toronto", "verification_status": "verified"}
+  ],
+  "media_kits": [
+    {"id": "kit_001", "campaign_id": "camp_001", "asset_id": "asset_001", "kit_type": "rear_window_decal", "qr_id": "qr_vehicle_001", "status": "activated"},
+    {"id": "kit_002", "campaign_id": "camp_001", "asset_id": "asset_002", "kit_type": "wearable_qr_patch", "qr_id": "qr_wear_001", "status": "activated"},
+    {"id": "kit_003", "campaign_id": "camp_001", "asset_id": "asset_003", "kit_type": "window_qr_sticker", "qr_id": "qr_window_001", "status": "activated"}
+  ],
+  "proof_events": [
+    {"id": "proof_001", "campaign_id": "camp_001", "owner_id": "owner_001", "asset_id": "asset_001", "media_kit_id": "kit_001", "proof_type": "install_photo", "status": "approved"},
+    {"id": "proof_002", "campaign_id": "camp_001", "owner_id": "owner_002", "asset_id": "asset_002", "media_kit_id": "kit_002", "proof_type": "wear_photo", "status": "approved"},
+    {"id": "proof_003", "campaign_id": "camp_001", "owner_id": "owner_003", "asset_id": "asset_003", "media_kit_id": "kit_003", "proof_type": "window_install_photo", "status": "submitted"}
+  ],
+  "tracking_events": [
+    {"id": "scan_001", "campaign_id": "camp_001", "qr_id": "qr_vehicle_001", "event_type": "qr_scan"},
+    {"id": "scan_002", "campaign_id": "camp_001", "qr_id": "qr_vehicle_001", "event_type": "qr_scan"},
+    {"id": "scan_003", "campaign_id": "camp_001", "qr_id": "qr_wear_001", "event_type": "qr_scan"},
+    {"id": "scan_004", "campaign_id": "camp_001", "qr_id": "qr_window_001", "event_type": "qr_scan"}
+  ],
+  "reward_states": [
+    {"id": "reward_001", "campaign_id": "camp_001", "owner_id": "owner_001", "proof_event_id": "proof_001", "amount_cents": 7500, "status": "eligible"},
+    {"id": "reward_002", "campaign_id": "camp_001", "owner_id": "owner_002", "proof_event_id": "proof_002", "amount_cents": 5000, "status": "eligible"},
+    {"id": "reward_003", "campaign_id": "camp_001", "owner_id": "owner_003", "proof_event_id": "proof_003", "amount_cents": 6500, "status": "held"}
+  ]
+}
